@@ -2,13 +2,16 @@
 
 ## Install nVidia drivers
 source: https://www.youtube.com/watch?v=1Xu1zsAgaEg
+
 source: https://linuxconfig.org/how-to-install-the-latest-nvidia-drivers-on-debian-9-stretch-linux
 
 ### downgrade to gcc 4.9
 - Downgrade gcc to 4.9, after CUDA is installed you can set it back to gcc 6
 
 #### Install this packages
+- Check the order again
 
+```bash
 package=cpp-4.9_4.9.2-10_amd64.deb 
 wget http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/$package
 
@@ -36,7 +39,7 @@ wget http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/$package
 
 wget http://ftp.us.debian.org/debian/pool/main/c/cloog/libcloog-isl4_0.18.2-1+b2_amd64.deb
 sudo dpkg -i  libcloog-isl4_0.18.2-1+b2_amd64.deb
-
+```
 
 
 
