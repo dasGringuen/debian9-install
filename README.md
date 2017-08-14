@@ -8,7 +8,7 @@ Transcript of: https://www.youtube.com/watch?v=1Xu1zsAgaEg
 
 ## downgrade to gcc 4.9
 - Downgrade gcc to 4.9, after CUDA is installed you can set it back to gcc 6
-- The drivers works with gcc 6 but not CUDA
+- The drivers work with gcc 6 but not CUDA
 
 ### Install this packages
 - Check the installation order again
