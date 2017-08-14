@@ -1,15 +1,15 @@
 # Debian 9 Stretch - installation notes
 
-## Install nVidia drivers
-source: https://www.youtube.com/watch?v=1Xu1zsAgaEg
+# NVIDIA drivers and CUDA
 
-source: https://linuxconfig.org/how-to-install-the-latest-nvidia-drivers-on-debian-9-stretch-linux
+Transcript of: https://www.youtube.com/watch?v=1Xu1zsAgaEg
 
-### downgrade to gcc 4.9
+## downgrade to gcc 4.9
 - Downgrade gcc to 4.9, after CUDA is installed you can set it back to gcc 6
+- The drivers works with gcc 6 but not CUDA
 
-#### Install this packages
-- Check the order again
+### Install this packages
+- Check the installation order again
 
 ```bash
 package=cpp-4.9_4.9.2-10_amd64.deb 
@@ -40,8 +40,7 @@ wget http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/$package
 wget http://ftp.us.debian.org/debian/pool/main/c/cloog/libcloog-isl4_0.18.2-1+b2_amd64.deb
 sudo dpkg -i  libcloog-isl4_0.18.2-1+b2_amd64.deb
 ```
-
-
+- Set gcc 4.9 as the default compiler
 
 ```bash
 sudo unlink /usr/bin/gcc
@@ -51,21 +50,31 @@ sudo unlink /usr/bin/g++
 sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++
 ```
 
+## Install nVidia drivers
+
+
 ```bash
 # aptitude update
 # aptitude -r install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')
 # apt install firmware-linux build-essential gcc-multilib
 ```
+And follow:
+https://linuxconfig.org/how-to-install-the-latest-nvidia-drivers-on-debian-9-stretch-linux
 
-CUDA
-=======
+## CUDA
+Note: perl stuff from the video
+
+```bash
 sudo apt-get install libcupti-dev
- 
-Note: the gcc trick must be done...
+./cuda_8.0.61_375.26_linux.run --tar mxvf
+sudo cp InstallUtils.pm /usr/lib/x86_64-linug-gnu/perl
+export $PERLLIB
+```
+
+```bash
+sudo apt-get install libcupti-dev
 sudo sh cuda_8.0.61_375.26_linux.run
-
-
-
+```
 
 ### Cudnn
 - Download cudnn 5.1 from nvidia
