@@ -2,6 +2,8 @@
 
 # NVIDIA drivers and CUDA
 
+Needed for Tensorflow and keras
+
 Transcript of: https://www.youtube.com/watch?v=1Xu1zsAgaEg
 
 ## downgrade to gcc 4.9
