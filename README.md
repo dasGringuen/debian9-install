@@ -2,16 +2,16 @@
 
 # NVIDIA drivers and CUDA
 
-Needed for Tensorflow and keras
+CUDA is needed in order to use Tensorflow and keras
 
-Transcript of: https://www.youtube.com/watch?v=1Xu1zsAgaEg
+The CUDA part is a Transcript of: https://www.youtube.com/watch?v=1Xu1zsAgaEg
 
 ## downgrade to gcc 4.9
-- Downgrade gcc to 4.9, after CUDA is installed you can set it back to gcc 6
-- The drivers work with gcc 6 but not CUDA
+- Downgrade gcc to 4.9. After CUDA is installed you can set it back to gcc 6
+- To install just the drivers, the gcc 6 works. CUDA works only with gcc 4.9
 
 ### Install this packages
-- Check the installation order again
+- TODO: Check the installation order again
 
 ```bash
 package=cpp-4.9_4.9.2-10_amd64.deb 
@@ -78,10 +78,10 @@ export $PERLLIB
 sudo apt-get install libcupti-dev
 sudo sh cuda_8.0.61_375.26_linux.run
 ```
-Note: no need of the --override thing
+Note: no need the --override thing if using gcc 4.9
 
 ### Cudnn
-- Download cudnn 5.1 from nvidia
+- Download cudnn 5.1 from the nvidia site
 ```bash
 tar xvzf cudnn-8.0-linux-x64-v5.1-ga.tgz
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
@@ -90,14 +90,14 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 ```
 
 ### Test
-Install tensor flow and keras
+Install TensorFlow and Keras
 
 ```bash
 sudo pip3 install keras
 sudo pip3 install --upgrade tensorflow-gpu
 ```
 
-put this in /etc/profile . after
+put this in /etc/profile
 ```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu
 export CUDA_HOME=/usr/local/cuda
