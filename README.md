@@ -96,12 +96,17 @@ Install TensorFlow and Keras
 sudo pip3 install keras
 sudo pip3 install --upgrade tensorflow-gpu
 ```
-
-put this in /etc/profile
+- To make it usable from the notebook and for everyuser.Put this in /etc/profile:
 ```bash
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu
 export CUDA_HOME=/usr/local/cuda
 export PATH=$PATH:/usr/local/cuda/bin
+```
+And append to /etc/ld.so.conf:
+```bash
+/usr/local/cuda/lib64
+/usr/local/lib
+/usr/lib/x86_64-linux-gnu
 ```
 
 Test the examples (compile them first)
