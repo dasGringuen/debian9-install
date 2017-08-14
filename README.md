@@ -51,8 +51,6 @@ sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++
 ```
 
 ## Install nVidia drivers
-
-
 ```bash
 # aptitude update
 # aptitude -r install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')
@@ -62,7 +60,8 @@ And follow:
 https://linuxconfig.org/how-to-install-the-latest-nvidia-drivers-on-debian-9-stretch-linux
 
 ## CUDA
-Note: perl stuff from the video
+
+- Perl stuff from the video
 
 ```bash
 sudo apt-get install libcupti-dev
@@ -71,10 +70,13 @@ sudo cp InstallUtils.pm /usr/lib/x86_64-linug-gnu/perl
 export $PERLLIB
 ```
 
+- Then install CUDA
+
 ```bash
 sudo apt-get install libcupti-dev
 sudo sh cuda_8.0.61_375.26_linux.run
 ```
+Note: no need of the --override thing
 
 ### Cudnn
 - Download cudnn 5.1 from nvidia
@@ -86,16 +88,26 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 ```
 
 ### Test
+Install tensor flow and keras
+
 ```bash
 sudo pip3 install keras
 sudo pip3 install --upgrade tensorflow-gpu
+```
 
 put this in /etc/profile . after
+```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu
 export CUDA_HOME=/usr/local/cuda
 export PATH=$PATH:/usr/local/cuda/bin
+```
 
+Test the examples (compile them first)
+
+```bash
 ~/NVIDIA_CUDA-8.0_Samples/bin/x86_64/linux/release/matrixMul
+
+Test with keras
 
 python3 -c "import keras"
 ```
