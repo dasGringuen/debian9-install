@@ -42,14 +42,13 @@ wget http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/$package
 wget http://ftp.us.debian.org/debian/pool/main/c/cloog/libcloog-isl4_0.18.2-1+b2_amd64.deb
 sudo dpkg -i  libcloog-isl4_0.18.2-1+b2_amd64.deb
 ```
-- Set gcc 4.9 as the default compiler
+- Set gcc 4.9 as the default compiler for nvcc
+
+We assume, that you have installed `/usr/local/cuda` symlink (via run installer or manually). Run following:
 
 ```bash
-sudo unlink /usr/bin/gcc
-sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc
-gcc --version
-sudo unlink /usr/bin/g++
-sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++
+sudo ln -s /usr/bin/gcc-4.9 /usr/local/cuda/bin/gcc 
+sudo ln -s /usr/bin/g++-4.9 /usr/local/cuda/bin/g++
 ```
 
 ## Install nVidia drivers
@@ -118,12 +117,3 @@ Test with keras
 
 python3 -c "import keras"
 ```
-### Set gcc 6 as default again
-```bash
-sudo unlink /usr/bin/gcc
-sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
-gcc --version
-sudo unlink /usr/bin/g++
-sudo ln -s /usr/bin/g++-6 /usr/bin/g++
-```
-
