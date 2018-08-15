@@ -42,15 +42,31 @@ wget http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/$package
 wget http://ftp.us.debian.org/debian/pool/main/c/cloog/libcloog-isl4_0.18.2-1+b2_amd64.deb
 sudo dpkg -i  libcloog-isl4_0.18.2-1+b2_amd64.deb
 ```
-- Set gcc 4.9 as the default compiler
+
+Alternatively you can add Debian Jessie repositories to your `sources.list.d` and install it via `apt`:
+
 
 ```bash
-sudo unlink /usr/bin/gcc
-sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc
-gcc --version
-sudo unlink /usr/bin/g++
-sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++
+sudo sh -c "echo deb http://http.us.debian.org/debian/ jessie main > /etc/apt/sources.list.d"
+sudo apt-get update && sudo apt-get install gcc-4.9 g++-4.9 -y
 ```
+
+After installation remove Debian Jessie repositories from your `sources.list.d` (or just comment line) and run:
+
+```bash
+sudo apt-get udpate
+```
+
+- Set gcc 4.9 as the default compiler for nvcc
+
+We assume, that you have installed `/usr/local/cuda` symlink (via run installer or manually). Run following:
+
+```bash
+sudo ln -s /usr/bin/gcc-4.9 /usr/local/cuda/bin/gcc 
+sudo ln -s /usr/bin/g++-4.9 /usr/local/cuda/bin/g++
+```
+
+If the above would not work for you, there is an option to nvcc `--compiler-bindir`, which can be used to point to an alternative compilers.
 
 ## Install nVidia drivers
 ```bash
@@ -63,6 +79,8 @@ https://linuxconfig.org/how-to-install-the-latest-nvidia-drivers-on-debian-9-str
 
 ## CUDA
 
+To use GPUs with compute capability (2.0 or 2.1) you should use CUDA version not greater than 8.*.
+
 - Perl stuff from the video
 
 ```bash
@@ -72,11 +90,12 @@ sudo cp InstallUtils.pm /usr/lib/x86_64-linug-gnu/perl
 export $PERLLIB
 ```
 
-- Then install CUDA
+- Then install CUDA (and patches if present)
 
 ```bash
 sudo apt-get install libcupti-dev
 sudo sh cuda_8.0.61_375.26_linux.run
+sudo sh cuda_8.0.61.2_linux.run
 ```
 Note: no need the --override thing if using gcc 4.9
 
@@ -118,12 +137,3 @@ Test with keras
 
 python3 -c "import keras"
 ```
-### Set gcc 6 as default again
-```bash
-sudo unlink /usr/bin/gcc
-sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
-gcc --version
-sudo unlink /usr/bin/g++
-sudo ln -s /usr/bin/g++-6 /usr/bin/g++
-```
-
